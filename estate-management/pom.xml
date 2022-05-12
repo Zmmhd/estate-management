@@ -69,6 +69,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
     </dependencies>
     <!--springboot集成maven插件，主要是防止运行jar文件出现：没有主清单属性问题-->
     <build>

@@ -29,7 +29,7 @@ public class CommunityController {
     @RequestMapping("/find")
     public Result find(){
         List<Community> all = communityService.findAll();
-        return new Result(false,200,"请求成功adasdasdas",all);
+        return new Result(false,200,"请求成功",all);
     }
     @RequestMapping("/search")
     public PageResult search(@RequestBody Map searchMap){
