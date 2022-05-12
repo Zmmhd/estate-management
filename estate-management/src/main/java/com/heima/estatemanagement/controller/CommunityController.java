@@ -5,7 +5,7 @@ import com.heima.estatemanagement.common.MessageConstant;
 import com.heima.estatemanagement.common.PageResult;
 import com.heima.estatemanagement.common.Result;
 import com.heima.estatemanagement.common.StatusCode;
-import com.heima.estatemanagement.domain.Community;
+import com.heima.estatemanagement.entity.Community;
 import com.heima.estatemanagement.service.CommunityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

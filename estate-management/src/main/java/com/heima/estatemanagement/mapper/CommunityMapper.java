@@ -1,6 +1,6 @@
-package com.heima.estatemanagement.dao;
+package com.heima.estatemanagement.mapper;
 
-import com.heima.estatemanagement.domain.Community;
+import com.heima.estatemanagement.entity.Community;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 @Repository

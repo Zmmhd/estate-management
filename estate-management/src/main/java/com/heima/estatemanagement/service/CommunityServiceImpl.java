@@ -2,8 +2,8 @@ package com.heima.estatemanagement.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.heima.estatemanagement.dao.CommunityMapper;
-import com.heima.estatemanagement.domain.Community;
+import com.heima.estatemanagement.mapper.CommunityMapper;
+import com.heima.estatemanagement.entity.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

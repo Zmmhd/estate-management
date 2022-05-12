@@ -1,7 +1,6 @@
 package com.heima.estatemanagement.service;
 
 import com.github.pagehelper.Page;
-import com.heima.estatemanagement.domain.Building;
 
 import java.util.List;
 import java.util.Map;

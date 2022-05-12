@@ -1,4 +1,4 @@
-package com.heima.estatemanagement.domain;
+package com.heima.estatemanagement.entity;
 
 import lombok.Data;
 

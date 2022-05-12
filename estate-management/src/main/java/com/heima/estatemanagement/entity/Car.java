@@ -1,4 +1,4 @@
-package com.heima.estatemanagement.domain;
+package com.heima.estatemanagement.entity;
 
 import lombok.Data;
 
@@ -10,19 +10,19 @@ import java.sql.Timestamp;
  * Created with IntelliJ IDEA.
  *
  * @Author: 朱明名
- * @Date: 2022/05/12/14:33
+ * @Date: 2022/05/12/11:00
  * @Description:
  */
 @Data
-@Table(name = "tb_parking_use")
-public class ParkingUse {
+@Table(name = "tb_car")
+public class Car {
     @Id
     Integer id;
-    String communityName;
-    Integer communityId;
     String picture;
-    String code;
-    String name;
-    Timestamp createTime;
+    Integer ownerId;
+    String color;
+    String carNumber;
+    String remark;
+    Timestamp creatTime;
     Timestamp updateTime;
 }
