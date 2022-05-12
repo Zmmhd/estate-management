@@ -6,11 +6,8 @@ import com.heima.estatemanagement.common.PageResult;
 import com.heima.estatemanagement.common.Result;
 import com.heima.estatemanagement.common.StatusCode;
 import com.heima.estatemanagement.domain.Building;
-import com.heima.estatemanagement.domain.Community;
-import com.heima.estatemanagement.service.BuildingService;
-import com.heima.estatemanagement.service.CommunityService;
+import com.heima.estatemanagement.service.BuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,15 +16,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auth: zhuan
- * @Desc:
+ * Created with IntelliJ IDEA.
+ * @Author: 朱明名
+ * @Date: 2022/5/12
+ * @Description: 
  */
 @RestController
 @RequestMapping("/building")
 public class BuildingController {
     
     @Autowired
-    private BuildingService buildingService;
+    private BuildingServiceImpl buildingService;
 
     @RequestMapping("/find")
     public Result find(){

@@ -6,7 +6,7 @@ import com.heima.estatemanagement.common.PageResult;
 import com.heima.estatemanagement.common.Result;
 import com.heima.estatemanagement.common.StatusCode;
 import com.heima.estatemanagement.domain.Community;
-import com.heima.estatemanagement.service.CommunityService;
+import com.heima.estatemanagement.service.CommunityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,15 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auth: zhuan
- * @Desc: 小区管理控制层:只负责接收前端浏览器发送的请求和请求参数，调用service层获取业务逻辑加工处理后的数据
+ * Created with IntelliJ IDEA.
+ * @Author: 朱明名
+ * @Date: 2022/5/12
+ * @Description:
  */
 @RestController
 @RequestMapping("/community")
 public class CommunityController {
     
     @Autowired
-    private CommunityService communityService;
+    private CommunityServiceImpl communityService;
 
     @RequestMapping("/find")
     public Result find(){
