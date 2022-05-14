@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        投诉列表添加
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/css/main.css" media="all">
+    <script type="text/javascript" src="/lib/loading/okLoading.js"></script>
+    <!--百度编辑器-->
+    <script src="ueditor/ueditor.config.js"></script>
+    <script src="ueditor/ueditor.all.min.js"></script>
+    <script src="ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<!-- 引入ElementUI样式 -->
+<link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div id="app">
+    <div class="x-nav">
+            <span class="layui-breadcrumb">
+              <a><cite>首页</cite></a>
+              <a><cite>业主信息管理</cite></a>
+              <a><cite>{{title}}</cite></a>
+            </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="x-body">
+        <el-form :model="complain" :rules="rules" ref="complainFormRef" label-width="120px" class="demo-ruleForm">
+            <el-form-item label="所属小区" prop="communityName">
+                <el-input v-model="complain.communityName"></el-input>
+            </el-form-item>
+            <el-form-item label="投诉人员" prop="owner_name">
+                <el-input v-model="complain.owner_name"></el-input>
+            </el-form-item>
+            <el-form-item label="投诉名称" prop="name">
+                <el-input v-model="complain.name"></el-input>
+            </el-form-item>
+            <el-form-item label="投诉事由" prop="reason">
+                <el-input v-model="complain.reason"></el-input>
+            </el-form-item>
+            <el-form-item label="状态" prop="status">
+                <el-radio-group v-model="complain.status">
+                    <el-radio label="0">匿名</el-radio>
+                    <el-radio label="1">不匿名</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="save()" style="text-align: center">保存</el-button>
+                <el-button @click="clearAll()" style="text-align: center">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script src="js/x-layui.js" charset="utf-8"></script>
+<!--导入Vue依赖包-->
+<script src="/js/vue.js" charset="utf-8"></script>
+<!-- 引入Element组件库 -->
+<script src="/js/index.js"></script>
+<!--导入Axios依赖包-->
+<script src="/js/axios.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el:"#app",
+        data:{
+            title:"添加人员",
+            complain:{id:""},
+            fileList:[],
+            rules: {
+                communityName: [
+                    { required: true, message: '请输入所属小区', trigger: 'blur' },
+                    { max: 50, message: '长度小于50个字符', trigger: 'blur' }
+                ],
+                owner_name: [
+                    { required: true, message: '请输入投诉人员', trigger: 'blur' }
+                ],
+                name: [
+                    { required: true, message: '请输入投诉名称', trigger: 'blur' }
+                ],
+                reason: [
+                    { required: true, message: '请输入投诉事由', trigger: 'blur' }
+                ],
+                status:[
+                    { required: true, message: '请选择状态', trigger: 'change' }
+                ],
+            }
+        },
+        methods:{
+            findById(){
+                axios.get("/complain/findById?id="+this.complain.id).then((res)=>{
+                    this.complain = res.data.data;
+                });
+            },
+
+
+            //表达重置
+            clearAll() {
+                this.$refs.complainFormRef.resetFields();
+            },
+            save(){
+                var method = "";
+                if(this.complain.id != null){
+                    method = "update"
+                }else{
+                    method = "add"
+                }
+                axios.post("/complain/"+method,this.complain).then((res)=>{
+                    if(res.data.flag){
+                        this.$message({
+                            message: res.data.message,
+                            type: 'success'
+                        });
+                    }
+                });
+            },
+            getQueryString(name){
+                let reg = `(^|&)${name}=([^&]*)(&|$)`
+                let r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+        },
+        created:function(){
+            layui.use(['element','layer','form'], function(){
+                $ = layui.jquery;//jquery
+                lement = layui.element();//面包导航
+                layer = layui.layer;//弹出层
+                form = layui.form();
+                okLoading.close($);
+            });
+            //获取父页面传递参数，投诉ID
+            this.complain.id = this.getQueryString("id");
+            //根据投诉ID获取报修对象，进行数据回显
+            if(this.complain.id != null && this.complain.id != ''){
+                this.title="修改投诉信息";
+                this.findById();
+            }
+        }
+    });
+</script>
+</body>
+</html>
