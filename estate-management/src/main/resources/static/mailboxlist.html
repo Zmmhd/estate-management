@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +12,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="css/main.css" media="all">
-    <link rel="stylesheet" href="css/bootstrap.css">
     <script type="text/javascript" src="lib/loading/okLoading.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--导入ElementUI样式列表，css样式一般都在页面头部-->
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <div class="x-nav">
@@ -25,40 +26,33 @@
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
-<div class="x-body">
-    <form class="layui-form x-center" action="" style="width:800px">
-        <div class="layui-form-pane" style="margin-top: 15px;">
-            <div class="layui-form-item">
-                <label class="layui-form-label">日期范围</label>
-                <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-                </div>
-                <div class="layui-input-inline">
-                    <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-                </div>
-                <div class="layui-input-inline">
-                    <input type="text" name="username"  placeholder="标题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width:80px">
-                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                </div>
-            </div>
-        </div>
-    </form>
+<div class="x-body" id="app">
+    <div>
+        <span class="demonstration">时间范围</span>
+        <el-date-picker
+                @change="dateChange"
+                v-model="selectDate"
+                type="daterange"
+                range-separator="-"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                :picker-options="pickerOptions">
+        </el-date-picker>
+        <span class="demonstration">搜索关键字</span>
+        <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入小区名称"></el-input>
+        <el-button type="primary" plain @click="searchMap.pageNum=1;search()">搜索</el-button>
+    </div>
+    <br>
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()">
-            <i class="layui-icon">&#xe640;</i>批量删除
-        </button>
-        <button class="layui-btn" onclick="mailbox_add('添加','mailboxadd.html','1000','600')">
-            <i class="layui-icon">&#xe608;</i>添加
-        </button>
-        <!-- <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge">4</span> 条</span> -->
+        <button class="layui-btn layui-btn-danger" @click="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+        <button class="layui-btn" @click="admin_add('添加','mailboxadd.html','1000','600')"><i class="layui-icon">&#xe608;</i>添加</button>
+        <!-- <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge">2</span> 条</span> -->
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
             <th>
-                <input type="checkbox" name="" value="">
+                <input type="checkbox" id="allChecked" :checked="checkedIDs.length===letterList.length" @click="allChecked">
             </th>
             <th>
                 ID
@@ -73,6 +67,9 @@
                 信件标题
             </th>
             <th>
+                信件内容
+            </th>
+            <th>
                 创建时间
             </th>
             <th>
@@ -83,107 +80,28 @@
             </th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
+        <tbody id="x-img">
+        <tr v-for="(letter,index) in letterList">
             <td>
-                <input type="checkbox" value="1" name="">
+                <input type="checkbox" :id="'id'+letter.id" :value="letter.id" v-model="checkedIDs">
             </td>
-            <td>
-                4            </td>
-            <td>
-                金华万府            </td>
-            <td >
-                admin            </td>
-            <td >
-                信件添加测试1            </td>
-            <td >
-                2020-01-04 23:38:12            </td>
-            <td class="td-status"> <span class="layui-btn layui-btn-danger " > 未读 </span> </td>
+            <td>{{letter.id}}</td>
+            <td>{{letter.communityName}}</td>
+            <td>{{letter.owner_name}}</td>
+            <td>{{letter.title}}</td>
+            <td>{{dateFormat(letter.createTime)}}</td>
+            <td class="td-status">
+                <span :class="letter.status == 0?'layui-btn layui-btn-normal':'layui-btn layui-btn-disabled'">
+                    {{letter.status == 0?'未读':'已读'}}
+                </span>
+            </td>
+            <td>{{letter.content}}</td>
             <td class="td-manage">
-                <a title="编辑" href="javascript:;" onclick="mailbox_edit('编辑','mailboxadd.html','4','1000','600')"
+                <a title="编辑" href="javascript:;" @click="letter_edit('编辑','mailboxadd.html',letter.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" href="javascript:;" onclick="mailbox_del(this,'4')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="">
-            </td>
-            <td>
-                3            </td>
-            <td>
-                金华万府            </td>
-            <td >
-                admin            </td>
-            <td >
-                信件添加测试            </td>
-            <td >
-                2020-01-04 23:37:59            </td>
-            <td class="td-status"> <span class="layui-btn layui-btn-danger " > 未读 </span> </td>
-            <td class="td-manage">
-                <a title="编辑" href="javascript:;" onclick="mailbox_edit('编辑','mailboxadd.html','3','1000','600')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="mailbox_del(this,'3')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="">
-            </td>
-            <td>
-                2            </td>
-            <td>
-                金华万府            </td>
-            <td >
-                admin            </td>
-            <td >
-            </td>
-            <td >
-                2020-01-04 23:02:54            </td>
-            <td class="td-status"> <span class="layui-btn layui-btn-danger " > 未读 </span> </td>
-            <td class="td-manage">
-                <a title="编辑" href="javascript:;" onclick="mailbox_edit('编辑','mailboxadd.html','2','1000','600')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="mailbox_del(this,'2')"
-                   style="text-decoration:none">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" value="1" name="">
-            </td>
-            <td>
-                1            </td>
-            <td>
-                东湖小区            </td>
-            <td >
-                admin            </td>
-            <td >
-            </td>
-            <td >
-                2020-01-04 23:00:38            </td>
-            <td class="td-status"> <span class="layui-btn layui-btn-normal " > 已读 </span>
-            </td>
-            <td class="td-manage">
-                <a title="编辑" href="javascript:;" onclick="mailbox_edit('编辑','mailboxadd.html','1','1000','600')"
-                   class="ml-5" style="text-decoration:none">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" href="javascript:;" onclick="mailbox_del(this,'1')"
+                <a title="删除" href="javascript:;" @click="del_one(letter.id)"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
@@ -191,99 +109,278 @@
         </tr>
         </tbody>
     </table>
-
-    <div id="page"></div>
+    <el-pagination
+            background
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-size="searchMap.pageSize"
+            layout="prev, pager, next,sizes"
+            :page-sizes="[2,10,20]"
+            style="text-align: right;"
+            :total="total">
+    </el-pagination>
 </div>
-<script src="lib/layui/layui.js" charset="utf-8"></script>
-<script src="js/x-layui.js" charset="utf-8"></script>
+<script src="/lib/layui/layui.js" charset="utf-8"></script>
+<!--js脚本一般是放在页面尾部-->
+<!--Vue js脚本-->
+<script src="/js/vue.js" charset="utf-8"></script>
+<!--引入ElementUI组件库-->
+<script src="/js/index.js" charset="utf-8"></script>
+<!--引入Axios js脚本-->
+<script src="/js/axios.js" charset="utf-8"></script>
+<!--引入时间插件包Momentjs-->
+<script src="/js/moment.min.js" charset="utf-8"></script>
 <script>
-    layui.use(['laydate','element','laypage','layer'], function(){
-        $ = layui.jquery;//jquery
-        laydate = layui.laydate;//日期插件
-        lement = layui.element();//面包导航
-        laypage = layui.laypage;//分页
-        layer = layui.layer;//弹出层
-        okLoading.close($);
-        //以上模块根据需要引入
-
-
-        var start = {
-            min: laydate.now()
-            ,max: '2099-06-16 23:59:59'
-            ,istoday: false
-            ,choose: function(datas){
-                end.min = datas; //开始日选好后，重置结束日的最小日期
-                end.start = datas //将结束日的初始值设定为开始日
+    var app = new Vue({
+        el:"#app",//声明当前Vue在页面的作用域
+        data:{
+            checkedIDs:[],
+            letterList:[],
+            total:10,
+            searchMap:{"startTime":"","endTime":"","name":"","pageNum":1,"pageSize":2},
+            selectDate:['',''],
+            pickerOptions: {
+                shortcuts: [{
+                    text: '最近一周',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近一个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近三个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }]
             }
-        };
+        },
+        methods:{
+            //分页条件查询信件列表
+            search(){
+                axios.post("/letter/search",this.searchMap).then((res)=>{
+                    app.letterList = res.data.data;
+                    app.total = res.data.total;
+                });
+            },
+            //单个删除
+            del_one(id){
+                this.$confirm('请问您是否要删除该信件信息?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //把选中的ID封装到集合中
+                    this.checkedIDs.push(id);
+                    //执行删除操作
+                    axios.post("/letter/del",this.checkedIDs).then((res)=>{
+                        if(res.data.flag){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                        }
+                        //删除成功，把选中的ID列表置为空
+                        this.checkedIDs = [];
+                        //把页面置为1，重新获取列表数据
+                        this.searchMap.pageNum = 1;
+                        this.search();
+                    });
 
-        var end = {
-            min: laydate.now()
-            ,max: '2099-06-16 23:59:59'
-            ,istoday: false
-            ,choose: function(datas){
-                start.max = datas; //结束日选好后，重置开始日的最大日期
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+            //多选删除
+            delAll(){
+                this.$confirm('请问您是否要删除选中信件信息?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //执行删除操作
+                    axios.post("/letter/del",this.checkedIDs).then((res)=>{
+                        if(res.data.flag){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                        }
+                        //删除成功，把选中的ID列表置为空
+                        this.checkedIDs = [];
+                        //把页面置为1，重新获取列表数据
+                        this.searchMap.pageNum = 1;
+                        this.search();
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+
+            //全选、全不选方法
+            allChecked: function () {
+                if (this.checkedIDs.length === this.letterList.length) {
+                    // 全不选
+                    this.checkedIDs = [];
+
+                } else {
+                    this.checkedIDs = [];
+                    // 全选
+                    this.letterList.forEach( (item) =>{
+                        this.checkedIDs.push(item.id); // 与checkbox的value统一
+                    })
+                }
+            },
+            //handleSizeChange每页数量发生变化后触发的方法
+            handleSizeChange(pageSize){
+                this.searchMap.pageSize = pageSize;
+                this.search();
+            },
+            //handleCurrentChange页码变化触发方法
+            handleCurrentChange(pageNum){
+                this.searchMap.pageNum = pageNum;
+                this.search();
+            },
+            //时间区间发生改变，searcHMap中时间区间条件也要变化
+            dateChange(){
+                //没有选择时间区间或者清理时间条件，当前时间区间为空字符串
+                if(this.selectDate == null || this.selectDate.length == 0){
+                    this.searchMap.startTime = '';
+                    this.searchMap.endTime = '';
+                }else{
+                    //当时间区间不为空，往searchMap中添加条件
+                    if(this.selectDate[0] != null && this.selectDate[0] != ''){
+                        this.searchMap.startTime = this.dateFormat(this.selectDate[0]);
+
+                    }
+                    if(this.selectDate[1] != null && this.selectDate[1] != ''){
+                        this.searchMap.endTime = this.dateFormat(this.selectDate[1]);
+                    }
+                }
+
+            },
+            //日期格式化方法
+            //date 要进行格式的日期 ；format 格式化的样式
+            dateFormat(date,format){
+                //默认格式化字符串"YYYY-MM-DD HH:mm:ss"
+                if(format == null || format == ''){
+                    format = "YYYY-MM-DD HH:mm:ss";
+                }
+                return moment(date).format(format);
+            },
+            /*添加*/
+            admin_add(title,url,w,h){
+                this.x_admin_show(title,url,w,h);
+            },
+            /*未读*/
+            admin_stop(id){
+                layer.confirm('确认要设置为未读吗？',function(index){
+                    //往后台发送请求，把当前信件状态修改为”未读“
+                    axios.get("/letter/updateStatus/1/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('未读!',{icon: 5,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
+            /*已读*/
+            admin_start(id){
+                layer.confirm('确认要设置为已读吗？',function(index){
+                    //往后台发送请求，把当前小区状态修改为”启用“
+                    axios.get("/letter/updateStatus/0/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('已读!',{icon: 6,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
+            //编辑
+            letter_edit (title,url,id,w,h) {
+                url = url+"?id="+id;
+                this.x_admin_show(title,url,w,h);
+            },
+            /*弹出层*/
+            /*
+                参数解释：
+                title	标题
+                url		请求的url
+                id		需要操作的数据id
+                w		弹出层宽度（缺省调默认值）
+                h		弹出层高度（缺省调默认值）
+            */
+            x_admin_show(title,url,width,height){
+                if (title == null || title == '') {
+                    title=false;
+                };
+                if (url == null || url == '') {
+                    url="404.html";
+                };
+                if (width == null || width == '') {
+                    width=800;
+                };
+                if (height == null || height == '') {
+                    height=($(window).height() - 50);
+                };
+
+                layer.open({
+                    type: 2,
+                    area: [width+'px', height +'px'],
+                    fix: false, //不固定
+                    maxmin: true,
+                    shadeClose: true,
+                    shade:0.4,
+                    title: title,
+                    content: url,
+                    cancel: function(index, layero){
+                        //使用右上角x关闭弹窗层，回调方法，重新加载页面数据，让修改或者新增的数据立马显示在页面上
+                        app.search();
+                    }
+                });
+            },
+            /*关闭弹出框口*/
+            x_admin_close(){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
             }
-        };
-
-        document.getElementById('LAY_demorange_s').onclick = function(){
-            start.elem = this;
-            laydate(start);
-        }
-        document.getElementById('LAY_demorange_e').onclick = function(){
-            end.elem = this
-            laydate(end);
+        },
+        created:function () {//Vue生命周期方法，加载页面时会执行该方法
+            layui.use(['laydate','element','laypage','layer'], function(){
+                $ = layui.jquery;//jquery
+                layer = layui.layer;//弹出层
+                okLoading.close($);
+                layer.ready(function(){ //为了layer.ext.js加载完毕再执行
+                    layer.photos({
+                        photos: '#x-img'
+                    });
+                });
+            });
+            //初始页面获取人员列表信息
+            this.search();
         }
     });
 
-    //批量删除提交
-    function delAll () {
-        layer.confirm('确认要删除吗？',function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-        });
-    }
-
-    function question_show (argument) {
-        layer.msg('可以跳到前台具体问题页面',{icon:1,time:1000});
-    }
-    /*添加*/
-    function mailbox_add(title,url,w,h){
-        x_admin_show(title,url,w,h);
-    }
-    //编辑
-    function mailbox_edit (title,url,id,w,h) {
-        url =url+"?id="+id;
-        x_admin_show(title,url,w,h);
-    }
-
-    /*删除*/
-    function mailbox_del(obj,id){
-        layer.confirm('确认要删除吗？',{icon:3,title:'提示信息'},function(index){
-            $.ajax({
-                type:"post",
-                url:"xxx",
-                data:{id:id},
-                dataType:"json",
-                success:function(data){
-                    //console.log(data);
-                    if(data.status==1){
-                        //发异步删除数据
-                        $(obj).parents("tr").remove();
-                        layer.msg(data.info,{icon:6,time:1000});
-                        setTimeout(function(){
-                            window.location.reload();
-                        },1000);return false;
-                    } else{
-                        layer.msg(data.info,{icon:5,time:1000});return false;
-                    }
-                }
-            });
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
-        });
-    }
 </script>
 
 </body>
