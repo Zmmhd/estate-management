@@ -42,7 +42,7 @@
             </el-form-item>
             <el-form-item label="收养时间" required>
                 <el-col :span="11">
-                    <el-form-item prop="date1">
+                    <el-form-item prop="adoptTime">
                         <el-date-picker type="date" placeholder="选择日期" v-model="pet.adoptTime" style="width: 100%;"></el-date-picker>
                     </el-form-item>
                 </el-col>
@@ -99,7 +99,7 @@
                 color: [
                     { required: true, message: '请输入宠物颜色', trigger: 'blur' }
                 ],
-                data1: [
+                adoptTime: [
                     { type: 'date', required: true, message: '请选择收养时间', trigger: 'change' }
                 ],
                 picture:[
