@@ -2,8 +2,8 @@ package com.heima.estatemanagement.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.heima.estatemanagement.mapper.BuildingMapper;
-import com.heima.estatemanagement.entity.Building;
+import com.heima.estatemanagement.mapper.CommunityMapper;
+import com.heima.estatemanagement.entity.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -13,20 +13,20 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class BuildingServiceImpl implements BaseService<Building> {
+public class CommunityService implements BaseService<Community> {
 
     @Autowired
-    private BuildingMapper buildingMapper;
+    private CommunityMapper communityMapper;
 
     @Override
-    public List<Building> findAll() {
-        return buildingMapper.selectAll();
+    public List<Community> findAll() {
+        return communityMapper.selectAll();
     }
 
     @Override
-    public Page<Building> search(Map searchMap) {
+    public Page<Community> search(Map searchMap) {
         //通用Mapper多条件搜索，标准写法
-        Example example = new Example(Building.class);//指定查询的表tb_community
+        Example example = new Example(Community.class);//指定查询的表tb_community
         //1.初始化分页条件
         int pageNum = 1;
         int pageSize = 2;
@@ -59,13 +59,13 @@ public class BuildingServiceImpl implements BaseService<Building> {
             }
         }
         PageHelper.startPage(pageNum, pageSize);//使用PageHelper插件完成分页
-        Page<Building> buildings = (Page<Building>) buildingMapper.selectByExample(example);
-        return buildings;
+        Page<Community> communities = (Page<Community>) communityMapper.selectByExample(example);
+        return communities;
     }
 
     @Override
-    public Boolean add(Building community) {
-        int row = buildingMapper.insert(community);
+    public Boolean add(Community community) {
+        int row = communityMapper.insert(community);
         if (row > 0) {
             return true;
         }
@@ -74,13 +74,26 @@ public class BuildingServiceImpl implements BaseService<Building> {
     }
 
     @Override
-    public Building findById(Integer id) {
-        return buildingMapper.selectByPrimaryKey(id);
+    public Community findById(Integer id) {
+        return communityMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public Boolean update(Building building) {
-        int row = buildingMapper.updateByPrimaryKeySelective(building);
+    public Boolean update(Community community) {
+        int row = communityMapper.updateByPrimaryKeySelective(community);
+        if (row > 0) {
+            return true;
+        }
+        return false;
+
+    }
+
+
+    public Boolean updateStatus(String status, Integer id) {
+        Community community = new Community();
+        community.setId(id);
+        community.setStatus(status);
+        int row = communityMapper.updateByPrimaryKeySelective(community);
         if (row > 0) {
             return true;
         }
@@ -91,7 +104,7 @@ public class BuildingServiceImpl implements BaseService<Building> {
     @Override
     public Boolean del(List<Integer> ids) {
         for (Integer id : ids) {
-            buildingMapper.deleteByPrimaryKey(id);
+            communityMapper.deleteByPrimaryKey(id);
         }
         return true;
     }

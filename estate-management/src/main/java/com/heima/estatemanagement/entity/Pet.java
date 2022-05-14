@@ -18,11 +18,13 @@ import java.sql.Timestamp;
 public class Pet {
     @Id
     Integer id;
-    String communityName;
-    Integer communityId;
     String picture;
-    String code;
+    String ownerName;
+    Integer ownerId;
     String name;
+    String color;
+    String remark;
     Timestamp createTime;
     Timestamp updateTime;
+    Timestamp adoptTime;
 }
