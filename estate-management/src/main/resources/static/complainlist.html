@@ -97,6 +97,10 @@
                 </span>
             </td>
             <td class="td-manage">
+                <a style="text-decoration:none" @click="complain.status == 0?admin_stop(complain.id):admin_start(complain.id)" href="javascript:;" :title="complain.status == 0?'匿名':'不匿名'">
+                    <i class="layui-icon" v-if="complain.status == 0">&#xe601;</i>
+                    <i class="layui-icon" v-if="complain.status == 1">&#xe62f;</i>
+                </a>
                 <a title="编辑" href="javascript:;" @click="complain_edit('编辑','complain_add.html',complain.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>

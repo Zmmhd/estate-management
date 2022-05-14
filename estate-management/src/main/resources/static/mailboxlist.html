@@ -97,6 +97,10 @@
             </td>
             <td>{{letter.content}}</td>
             <td class="td-manage">
+                <a style="text-decoration:none" @click="letter.status == 0?admin_stop(letter.id):admin_start(letter.id)" href="javascript:;" :title="letter.status == 0?'未读':'已读'">
+                    <i class="layui-icon" v-if="letter.status == 0">&#xe601;</i>
+                    <i class="layui-icon" v-if="letter.status == 1">&#xe62f;</i>
+                </a>
                 <a title="编辑" href="javascript:;" @click="letter_edit('编辑','mailboxadd.html',letter.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>

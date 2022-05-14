@@ -97,6 +97,10 @@
                 </span>
             </td>
             <td class="td-manage">
+                <a style="text-decoration:none" @click="repair.status == 0?admin_stop(repair.id):admin_start(repair.id)" href="javascript:;" :title="repair.status == 0?'待受理':'已受理'">
+                    <i class="layui-icon" v-if="repair.status == 0">&#xe601;</i>
+                    <i class="layui-icon" v-if="repair.status == 1">&#xe62f;</i>
+                </a>
                 <a title="编辑" href="javascript:;" @click="repair_edit('编辑','repairadd.html',repair.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>

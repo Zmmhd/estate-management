@@ -110,6 +110,10 @@
             </td>
             <td>{{activity.content}}</td>
             <td class="td-manage">
+                <a style="text-decoration:none" @click="activity.status == 0?admin_stop(activity.id):admin_start(activity.id)" href="javascript:;" :title="activity.status == 0?'有效':'无效'">
+                    <i class="layui-icon" v-if="activity.status == 0">&#xe601;</i>
+                    <i class="layui-icon" v-if="activity.status == 1">&#xe62f;</i>
+                </a>
                 <a title="编辑" href="javascript:;" @click="activity_edit('编辑','activity_add.html',activity.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
