@@ -314,6 +314,32 @@
             admin_add(title,url,w,h){
                 this.x_admin_show(title,url,w,h);
             },
+            /*租用*/
+            admin_stop(id){
+                layer.confirm('确认要设置为租用吗？',function(index){
+                    //往后台发送请求，把当前车位使用状况修改为”租用“
+                    axios.get("/activity/updateStatus/1/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('租用!',{icon: 5,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
+            /*售出*/
+            admin_start(id){
+                layer.confirm('确认要设置为售出吗？',function(index){
+                    //往后台发送请求，把当前车位使用状况修改为”售出“
+                    axios.get("/activity/updateStatus/0/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('售出!',{icon: 6,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
             //编辑
             parkingusage_edit (title,url,id,w,h) {
                 url = url+"?id="+id;

@@ -303,6 +303,32 @@
             admin_add(title,url,w,h){
                 this.x_admin_show(title,url,w,h);
             },
+            /*无效*/
+            admin_stop(id){
+                layer.confirm('确认要设置为无效吗？',function(index){
+                    //往后台发送请求，把当前活动状态修改为”无效“
+                    axios.get("/activity/updateStatus/1/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('无效!',{icon: 5,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
+            /*有效*/
+            admin_start(id){
+                layer.confirm('确认要设置为有效吗？',function(index){
+                    //往后台发送请求，把当前活动状态修改为”有效“
+                    axios.get("/activity/updateStatus/0/"+id).then((res)=>{
+                        if(res.data.flag){
+                            layer.msg('有效!',{icon: 6,time:1000});
+                        }
+                        app.search();
+                    })
+
+                });
+            },
             //编辑
             activity_edit (title,url,id,w,h) {
                 url = url+"?id="+id;
