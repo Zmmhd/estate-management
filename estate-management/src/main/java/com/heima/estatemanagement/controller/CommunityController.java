@@ -6,7 +6,7 @@ import com.heima.estatemanagement.common.PageResult;
 import com.heima.estatemanagement.common.Result;
 import com.heima.estatemanagement.common.StatusCode;
 import com.heima.estatemanagement.entity.Community;
-import com.heima.estatemanagement.service.CommunityServiceImpl;
+import com.heima.estatemanagement.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ import java.util.Map;
 public class CommunityController {
     
     @Autowired
-    private CommunityServiceImpl communityService;
+    private CommunityService communityService;
 
     @RequestMapping("/find")
     public Result find(){

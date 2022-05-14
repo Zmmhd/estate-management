@@ -6,7 +6,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 //注意：@MapperScan注解要导入TK包下的
-@MapperScan(basePackages = "com.heima.estatemanagement.dao")
+@MapperScan(basePackages = "com.heima.estatemanagement.mapper")
 public class EstateManagementApplication {
 
     public static void main(String[] args) {
