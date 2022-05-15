@@ -136,7 +136,7 @@
             checkedIDs:[],
             vehicleList:[],
             total:10,
-            searchMap:{"startTime":"","endTime":"","carNumber":"","pageNum":1,"pageSize":2},
+            searchMap:{"startTime":"","endTime":"","name":"","pageNum":1,"pageSize":2},
             selectDate:['',''],
             pickerOptions: {
                 shortcuts: [{
@@ -170,7 +170,7 @@
             //分页条件查询车辆列表
             search(){
                 axios.post("/vehicle/search",this.searchMap).then((res)=>{
-                    app.petList = res.data.data;
+                    app.vehicleList = res.data.data;
                     app.total = res.data.total;
                 });
             },
