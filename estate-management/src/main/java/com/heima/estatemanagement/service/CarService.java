@@ -51,7 +51,11 @@ public class CarService {
             }
             //名称模糊搜索
             if (StringUtil.isNotEmpty((String) searchMap.get("name"))) {
-                criteria.andLike("name", "%" + (String) searchMap.get("name") + "%");
+
+                System.out.println("----------------");
+                System.out.println(searchMap.get("carNumber"));
+
+                criteria.andLike("carNumber", "%" + (String) searchMap.get("name") + "%");
             }
             if ((Integer) searchMap.get("pageNum") != null) {
                 pageNum = (Integer) searchMap.get("pageNum");
