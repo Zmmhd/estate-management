@@ -1,25 +1,21 @@
-package com.heima.estatemanagement.entity;
+package com.heima.estatemanagement.entity.Vo;
 
 import lombok.Data;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
  * Created with IntelliJ IDEA.
  *
  * @Author: 朱明名
- * @Date: 2022/05/12/11:00
+ * @Date: 2022/05/15/11:44
  * @Description:
  */
 @Data
-@Table(name = "tb_car")
-public class Car {
-    @Id
+public class CarVo {
     Integer id;
     String picture;
-    Integer ownerId;
+    String ownerName;
     String color;
     String carNumber;
     String remark;
