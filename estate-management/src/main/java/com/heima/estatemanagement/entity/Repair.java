@@ -20,9 +20,14 @@ public class Repair {
     Integer id;
     String communityName;
     Integer communityId;
-    String picture;
-    String code;
-    String name;
+    String buildingName;
+    Integer buildingId;
+    String ownerName;
+    Integer ownerId;
+    String deviceName;
+    Integer deviceId;
+    String description;
     Timestamp createTime;
     Timestamp updateTime;
+    char status;
 }

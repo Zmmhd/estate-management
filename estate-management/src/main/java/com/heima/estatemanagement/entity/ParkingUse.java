@@ -20,9 +20,16 @@ public class ParkingUse {
     Integer id;
     String communityName;
     Integer communityId;
-    String picture;
     String code;
-    String name;
+    String carNumber;
+    String picture;
+    String ownerName;
+    Integer ownerId;
+    Integer telephone;
+    char useType;
+    Integer totalFee;
     Timestamp createTime;
     Timestamp updateTime;
+    Timestamp startTime;
+    Timestamp endTime;
 }

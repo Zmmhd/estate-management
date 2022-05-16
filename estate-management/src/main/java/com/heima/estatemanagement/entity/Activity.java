@@ -28,4 +28,6 @@ public class Activity {
     Timestamp startTime;
     Timestamp endTime;
     char status;
+    String phone;
+    String content;
 }
