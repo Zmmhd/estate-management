@@ -23,7 +23,7 @@ public class Complaint {
     Integer ownerId;
     String ownerName;
     String description;
-    String reason;
+    String name;
     Timestamp createTime;
     Timestamp updateTime;
     char status;
