@@ -39,8 +39,8 @@
             <el-form-item label="投诉人员" prop="owner_name">
                 <el-input v-model="complain.owner_name"></el-input>
             </el-form-item>
-            <el-form-item label="投诉名称" prop="name">
-                <el-input v-model="complain.name"></el-input>
+            <el-form-item label="投诉描述" prop="description">
+                <el-input v-model="complain.description"></el-input>
             </el-form-item>
             <el-form-item label="投诉事由" prop="reason">
                 <el-input v-model="complain.reason"></el-input>
@@ -81,8 +81,8 @@
                 owner_name: [
                     { required: true, message: '请输入投诉人员', trigger: 'blur' }
                 ],
-                name: [
-                    { required: true, message: '请输入投诉名称', trigger: 'blur' }
+                description: [
+                    { required: true, message: '请输入投诉描述', trigger: 'blur' }
                 ],
                 reason: [
                     { required: true, message: '请输入投诉事由', trigger: 'blur' }

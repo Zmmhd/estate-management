@@ -28,11 +28,11 @@
     </div>
     <div class="x-body">
         <el-form :model="personnel" :rules="rules" ref="personnelFormRef" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="所属小区" prop="communityName">
-                <el-input v-model="personnel.communityName"></el-input>
+            <el-form-item label="所属小区ID" prop="communityID">
+                <el-input v-model="personnel.communityID"></el-input>
             </el-form-item>
-            <el-form-item label="所属房产" prop="buildingName">
-                <el-input v-model="personnel.buildingName"></el-input>
+            <el-form-item label="所属房产ID" prop="houseID">
+                <el-input v-model="personnel.houseID"></el-input>
             </el-form-item>
             <el-form-item label="成员名称" prop="name">
                 <el-input v-model="personnel.name"></el-input>
@@ -105,13 +105,12 @@
             personnel:{thumbnail:"",id:""},
             fileList:[],
             rules: {
-                communityName: [
-                    { required: true, message: '请输入所属小区', trigger: 'blur' },
+                communityID: [
+                    { required: true, message: '请输入所属小区ID', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                buildingName: [
-                    { required: true, message: '请输入所属房产', trigger: 'blur' },
-                    { min: 11,max: 20, message: '长度必须大于11、小于20个字符', trigger: 'blur' }
+                houseID: [
+                    { required: true, message: '请输入所属房产ID', trigger: 'blur' },
                 ],
                 name: [
                     { required: true, message: '请输入成员名称', trigger: 'blur' }

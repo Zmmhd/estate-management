@@ -39,7 +39,7 @@
                 :picker-options="pickerOptions">
         </el-date-picker>
         <span class="demonstration">搜索关键字</span>
-        <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入小区名称"></el-input>
+        <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入成员名称"></el-input>
         <el-button type="primary" plain @click="searchMap.pageNum=1;search()">搜索</el-button>
     </div>
     <br>
@@ -58,10 +58,10 @@
                 ID
             </th>
             <th>
-                所属小区
+                所属小区ID
             </th>
             <th>
-                所属房产
+                所属房产ID
             </th>
             <th>
                 成员名称
@@ -104,8 +104,8 @@
                 <input type="checkbox" :id="'id'+personnel.id" :value="personnel.id" v-model="checkedIDs">
             </td>
             <td>{{personnel.id}}</td>
-            <td>{{personnel.communityName}}</td>
-            <td>{{personnel.buildingName}}</td>
+            <td>{{personnel.communityID}}</td>
+            <td>{{personnel.houseID}}</td>
             <td>{{personnel.name}}</td>
             <td>
                 <img :src="urlImg(personnel.thumbnail)" width="50" height="30" alt="">

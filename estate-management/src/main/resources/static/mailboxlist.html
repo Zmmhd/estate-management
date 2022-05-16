@@ -39,7 +39,7 @@
                 :picker-options="pickerOptions">
         </el-date-picker>
         <span class="demonstration">搜索关键字</span>
-        <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入小区名称"></el-input>
+        <el-input v-model="searchMap.origin" style="width: 20%" placeholder="请输入信件来源"></el-input>
         <el-button type="primary" plain @click="searchMap.pageNum=1;search()">搜索</el-button>
     </div>
     <br>
@@ -87,7 +87,7 @@
             </td>
             <td>{{letter.id}}</td>
             <td>{{letter.communityName}}</td>
-            <td>{{letter.owner_name}}</td>
+            <td>{{letter.origin}}</td>
             <td>{{letter.title}}</td>
             <td>{{dateFormat(letter.createTime)}}</td>
             <td class="td-status">
@@ -141,7 +141,7 @@
             checkedIDs:[],
             letterList:[],
             total:10,
-            searchMap:{"startTime":"","endTime":"","name":"","pageNum":1,"pageSize":2},
+            searchMap:{"startTime":"","endTime":"","origin":"","pageNum":1,"pageSize":2},
             selectDate:['',''],
             pickerOptions: {
                 shortcuts: [{
