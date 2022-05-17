@@ -36,11 +36,11 @@
             <el-form-item label="所属小区" prop="communityName">
                 <el-input v-model="repair.communityName"></el-input>
             </el-form-item>
-            <el-form-item label="报修人员" prop="owner_name">
-                <el-input v-model="repair.owner_name"></el-input>
+            <el-form-item label="报修人员" prop="ownerName">
+                <el-input v-model="repair.ownerName"></el-input>
             </el-form-item>
-            <el-form-item label="设备名称" prop="device_name">
-                <el-input v-model="repair.device_name"></el-input>
+            <el-form-item label="设备名称" prop="deviceName">
+                <el-input v-model="repair.deviceName"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="status">
                 <el-radio-group v-model="repair.status">
@@ -70,7 +70,7 @@
     var app = new Vue({
         el:"#app",
         data:{
-            title:"添加人员",
+            title:"添加报修",
             repair:{id:""},
             fileList:[],
             rules: {
@@ -78,10 +78,10 @@
                     { required: true, message: '请输入所属小区', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                owner_name: [
+                ownerName: [
                     { required: true, message: '请输入报修人员', trigger: 'blur' }
                 ],
-                device_name: [
+                deviceName: [
                     { required: true, message: '请输入设备名称', trigger: 'blur' }
                 ],
                 status:[

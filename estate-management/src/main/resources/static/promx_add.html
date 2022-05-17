@@ -31,20 +31,20 @@
             <el-form-item label="所属小区" prop="communityName">
                 <el-input v-model="promx.communityName"></el-input>
             </el-form-item>
-            <el-form-item label="收费项目名称" prop="name">
-                <el-input v-model="promx.name"></el-input>
+            <el-form-item label="收费项目名称" prop="chargeItemName">
+                <el-input v-model="promx.chargeItemName"></el-input>
             </el-form-item>
             <el-form-item label="业主" prop="contractor">
                 <el-input v-model="promx.contractor"></el-input>
             </el-form-item>
-            <el-form-item label="应收金额(￥)" prop="pay_money">
-                <el-input v-model="promx.pay_money"></el-input>
+            <el-form-item label="应收金额(￥)" prop="payMoney">
+                <el-input v-model="promx.payMoney"></el-input>
             </el-form-item>
-            <el-form-item label="实收金额(￥)" prop="actual_money">
-                <el-input v-model="promx.actual_money"></el-input>
+            <el-form-item label="实收金额(￥)" prop="actualMoney">
+                <el-input v-model="promx.actualMoney"></el-input>
             </el-form-item>
-            <el-form-item label="电话号码" prop="phone">
-                <el-input v-model="promx.phone"></el-input>
+            <el-form-item label="电话号码" prop="telephone">
+                <el-input v-model="promx.telephone"></el-input>
             </el-form-item>
             <el-form-item label="缴费时间" required>
                 <el-col :span="11">
@@ -80,19 +80,19 @@
                     { required: true, message: '请输入所属小区', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                name: [
+                chargeItemName: [
                     { required: true, message: '请输入收费项目名称', trigger: 'blur' }
                 ],
                 contractor: [
                     { required: true, message: '请输入业主', trigger: 'blur' }
                 ],
-                pay_money: [
+                payMoney: [
                     { required: true, message: '应收金额(￥)', trigger: 'blur' }
                 ],
-                actual_money: [
+                actualMoney: [
                     { required: true, message: '实收金额(￥)', trigger: 'blur' }
                 ],
-                phone: [
+                telephone: [
                     { required: true, message: '请输入电话号码', trigger: 'blur' }
                 ],
                 payTime: [

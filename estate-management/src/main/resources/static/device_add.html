@@ -40,11 +40,11 @@
             <el-form-item label="品牌" prop="brand">
                 <el-input v-model="device.brand"></el-input>
             </el-form-item>
-            <el-form-item label="购买单价" prop="price">
-                <el-input v-model="device.price"></el-input>
+            <el-form-item label="购买单价" prop="unitPrice">
+                <el-input v-model="device.unitPrice"></el-input>
             </el-form-item>
-            <el-form-item label="购买数量" prop="number">
-                <el-input v-model="device.number"></el-input>
+            <el-form-item label="购买数量" prop="num">
+                <el-input v-model="device.num"></el-input>
             </el-form-item>
             <el-form-item label="购买时间" required>
                 <el-col :span="11">
@@ -53,8 +53,8 @@
                     </el-form-item>
                 </el-col>
             </el-form-item>
-            <el-form-item label="预计使用年限" prop="expected_useful_life">
-                <el-input v-model="device.expected_useful_life"></el-input>
+            <el-form-item label="预计使用年限" prop="expectedUsefulLife">
+                <el-input v-model="device.expectedUsefulLife"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="save()" style="text-align: center">保存</el-button>
@@ -75,7 +75,7 @@
     var app = new Vue({
         el:"#app",
         data:{
-            title:"添加人员",
+            title:"添加设备",
             device:{id:""},
             fileList:[],
             rules: {
@@ -92,16 +92,16 @@
                 brand: [
                     { required: true, message: '品牌', trigger: 'blur' }
                 ],
-                price: [
+                unitPrice: [
                     { required: true, message: '请输入购买单价', trigger: 'blur' }
                 ],
-                number: [
+                num: [
                     { required: true, message: '请输入购买数量', trigger: 'blur' }
                 ],
                 purchaseDate: [
                     { type: 'date', required: true, message: '请选择购买时间', trigger: 'change' }
                 ],
-                expected_useful_life: [
+                expectedUsefulLife: [
                     { required: true, message: '请输入预计使用年限', trigger: 'blur' }
                 ],
             }

@@ -28,17 +28,17 @@
     </div>
     <div class="x-body">
         <el-form :model="vehicle" :rules="rules" ref="vehicleFormRef" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="所属小区" prop="communityname">
-                <el-input v-model="vehicle.community_name"></el-input>
+            <el-form-item label="所属小区" prop="communityName">
+                <el-input v-model="vehicle.communityName"></el-input>
             </el-form-item>
-            <el-form-item label="所属成员" prop="owner_name">
-                <el-input v-model="vehicle.owner_name"></el-input>
+            <el-form-item label="所属成员" prop="ownerName">
+                <el-input v-model="vehicle.ownerName"></el-input>
             </el-form-item>
             <el-form-item label="车辆颜色" prop="color">
                 <el-input v-model="vehicle.color"></el-input>
             </el-form-item>
-            <el-form-item label="车牌号码" prop="number">
-                <el-input v-model="vehicle.number"></el-input>
+            <el-form-item label="车牌号码" prop="carNumber">
+                <el-input v-model="vehicle.carNumber"></el-input>
             </el-form-item>
             <el-form-item label="车辆缩略图" prop="picture">
                 <el-upload
@@ -79,17 +79,17 @@
             vehicle:{picture:"",id:""},
             fileList:[],
             rules: {
-                communityname: [
+                communityName: [
                     { required: true, message: '请输入所属小区', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                owner_name: [
+                ownerName: [
                     { required: true, message: '请输入所属成员', trigger: 'blur' },
                 ],
                 color: [
                     { required: true, message: '请输入车辆颜色', trigger: 'blur' }
                 ],
-                number: [
+                carNumber: [
                     { required: true, message: '请输入车牌号码', trigger: 'blur' }
                 ],
                 picture:[

@@ -58,10 +58,10 @@
                 ID
             </th>
             <th>
-                所属小区
+                所属小区ID
             </th>
             <th>
-                所属房产
+                所属房产ID
             </th>
             <th>
                 成员名称
@@ -104,11 +104,11 @@
                 <input type="checkbox" :id="'id'+personnel.id" :value="personnel.id" v-model="checkedIDs">
             </td>
             <td>{{personnel.id}}</td>
-            <td>{{personnel.communityName}}</td>
-            <td>{{personnel.houseName}}</td>
+            <td>{{personnel.communityId}}</td>
+            <td>{{personnel.buildingId}}</td>
             <td>{{personnel.name}}</td>
             <td>
-                <img :src="urlImg(personnel.thumbnail)" width="50" height="30" alt="">
+                <img :src="urlImg(personnel.picture)" width="50" height="30" alt="">
             </td>
             <td>{{personnel.idcard}}</td>
             <td>{{personnel.telephone}}</td>

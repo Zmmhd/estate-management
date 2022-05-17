@@ -40,7 +40,7 @@
                 <el-input v-model="letter.origin"></el-input>
             </el-form-item>
             <el-form-item label="信件标题" prop="title">
-                <el-input v-model="letter.device_name"></el-input>
+                <el-input v-model="letter.title"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="status">
                 <el-radio-group v-model="letter.status">
@@ -70,7 +70,7 @@
     var app = new Vue({
         el:"#app",
         data:{
-            title:"添加人员",
+            title:"添加信件",
             letter:{id:""},
             fileList:[],
             rules: {
@@ -78,7 +78,7 @@
                     { required: true, message: '请输入所属小区', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                owner_name: [
+                origin: [
                     { required: true, message: '请输入信件来源', trigger: 'blur' }
                 ],
                 title: [

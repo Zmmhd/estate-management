@@ -28,30 +28,30 @@
     </div>
     <div class="x-body">
         <el-form :model="personnel" :rules="rules" ref="personnelFormRef" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="所属小区ID" prop="communityID">
-                <el-input v-model="personnel.communityID"></el-input>
+            <el-form-item label="所属小区ID" prop="communityId">
+                <el-input v-model="personnel.communityId"></el-input>
             </el-form-item>
-            <el-form-item label="所属房产ID" prop="houseID">
-                <el-input v-model="personnel.houseID"></el-input>
+            <el-form-item label="所属房产ID" prop="houseId">
+                <el-input v-model="personnel.houseId"></el-input>
             </el-form-item>
             <el-form-item label="成员名称" prop="name">
                 <el-input v-model="personnel.name"></el-input>
             </el-form-item>
-            <el-form-item label="身份证号" prop="IDnumber">
-                <el-input v-model="personnel.IDnumber"></el-input>
+            <el-form-item label="身份证号" prop="IDcard">
+                <el-input v-model="personnel.idcard"></el-input>
             </el-form-item>
             <el-form-item label="出生日期" required>
                 <el-col :span="11">
                     <el-form-item prop="date1">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="personnel.bornTime" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="personnel.birthday" style="width: 100%;"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-form-item>
-            <el-form-item label="联系方式" prop="phone">
-                <el-input v-model="personnel.phone"></el-input>
+            <el-form-item label="联系方式" prop="telephone">
+                <el-input v-model="personnel.telephone"></el-input>
             </el-form-item>
-            <el-form-item label="职业" prop="career">
-                <el-input v-model="personnel.career"></el-input>
+            <el-form-item label="职业" prop="profession">
+                <el-input v-model="personnel.profession"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="sex">
                 <el-radio-group v-model="personnel.sex">
@@ -66,7 +66,7 @@
                     <el-option label="租户" value="3"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="成员照片" prop="thumbnail">
+            <el-form-item label="成员照片" prop="picture">
                 <el-upload
                         class="upload-demo"
                         action="/estate/fileupload"
@@ -102,29 +102,29 @@
         el:"#app",
         data:{
             title:"添加人员",
-            personnel:{thumbnail:"",id:""},
+            personnel:{picture:"",id:""},
             fileList:[],
             rules: {
-                communityID: [
+                communityId: [
                     { required: true, message: '请输入所属小区ID', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                houseID: [
+                houseId: [
                     { required: true, message: '请输入所属房产ID', trigger: 'blur' },
                 ],
                 name: [
                     { required: true, message: '请输入成员名称', trigger: 'blur' }
                 ],
-                IDnumber: [
+                IDcard: [
                     { required: true, message: '请输入身份证号', trigger: 'blur' }
                 ],
                 date1: [
                     { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
                 ],
-                phone: [
+                telephone: [
                     { required: true, message: '请输入联系方式', trigger: 'blur' }
                 ],
-                career: [
+                profession: [
                     { required: true, message: '请输入职业', trigger: 'blur' },
                 ],
                 sex: [
@@ -133,7 +133,7 @@
                 type: [
                     { required: true, message: '请选择成员类型', trigger: 'change' }
                 ],
-                thumbnail:[
+                picture:[
                     { required: true, message: '请上传成员照片', trigger: 'change' }
                 ],
                 remark: [
@@ -146,15 +146,15 @@
             findById(){
                 axios.get("/personnel/findById?id="+this.personnel.id).then((res)=>{
                     this.personnel = res.data.data;
-                    this.fileList.push({url:"http://localhost/estate"+this.personnel.thumbnail});
+                    this.fileList.push({url:"http://localhost/estate"+this.personnel.picture});
                 });
             },
             handleSuccess(response, file, fileList){
-                this.personnel.thumbnail=response.data;
+                this.personnel.picture=response.data;
             },
             handleRemove() {
-                axios.get("/estate/delfile?fileName="+this.personnel.thumbnail).then((res)=>{
-                    app.personnel.thumbnail="";
+                axios.get("/estate/delfile?fileName="+this.personnel.picture).then((res)=>{
+                    app.personnel.picture="";
                     if(res.data.flag){
                         app.fileList=[];
                         this.$message({
@@ -198,7 +198,7 @@
                 });
             },
             imgUrl(){
-                return "http://localhost/estate"+app.personnel.thumbnail;
+                return "http://localhost/estate"+app.personnel.picture;
             },
             getQueryString(name){
                 let reg = `(^|&)${name}=([^&]*)(&|$)`

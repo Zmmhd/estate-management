@@ -28,11 +28,11 @@
     </div>
     <div class="x-body">
         <el-form :model="pet" :rules="rules" ref="petFormRef" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="所属小区" prop="communityname">
-                <el-input v-model="pet.community_name"></el-input>
+            <el-form-item label="所属小区" prop="communityName">
+                <el-input v-model="pet.communityName"></el-input>
             </el-form-item>
-            <el-form-item label="所属成员" prop="owner_name">
-                <el-input v-model="pet.owner_name"></el-input>
+            <el-form-item label="所属成员" prop="ownerName">
+                <el-input v-model="pet.ownerName"></el-input>
             </el-form-item>
             <el-form-item label="宠物名称" prop="name">
                 <el-input v-model="pet.name"></el-input>
@@ -86,11 +86,11 @@
             pet:{picture:"",id:""},
             fileList:[],
             rules: {
-                communityname: [
+                communityName: [
                     { required: true, message: '请输入所属小区', trigger: 'blur' },
                     { max: 50, message: '长度小于50个字符', trigger: 'blur' }
                 ],
-                owner_name: [
+                ownerName: [
                     { required: true, message: '请输入所属成员', trigger: 'blur' },
                 ],
                 name: [

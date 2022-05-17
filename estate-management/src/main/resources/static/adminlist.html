@@ -39,7 +39,7 @@
                 :picker-options="pickerOptions">
         </el-date-picker>
         <span class="demonstration">搜索关键字</span>
-        <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入登录名"></el-input>
+        <el-input v-model="searchMap.loginName" style="width: 20%" placeholder="请输入登录名"></el-input>
         <el-button type="primary" plain @click="searchMap.pageNum=1;search()">搜索</el-button>
     </div>
     <br>
@@ -86,11 +86,11 @@
                 <input type="checkbox" :id="'id'+admin.id" :value="admin.id" v-model="checkedIDs">
             </td>
             <td>{{admin.id}}</td>
-            <td>{{admin.name}}</td>
-            <td>{{admin.phone}}</td>
+            <td>{{admin.loginName}}</td>
+            <td>{{admin.telephone}}</td>
             <td>{{admin.email}}</td>
-            <td>{{admin.role}}</td>
-            <td>{{admin.joinTime}}</td>
+            <td>{{admin.roleId}}</td>
+            <td>{{admin.createTime}}</td>
             <td class="td-status">
                 <span :class="admin.status == 0?'layui-btn layui-btn-normal':'layui-btn layui-btn-disabled'">
                     {{admin.status == 0?'禁用':'停用'}}
