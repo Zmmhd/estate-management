@@ -5,7 +5,7 @@ spring:
     name: goods
   datasource: #连接数据库配置
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://112.74.46.133:3306/estate?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://139.9.58.128:3306/estate?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root #数据库用户
     password: dachuang #数据库密码，需要根据实际情况进行填写
   servlet:
