@@ -21,8 +21,8 @@ public class OwnerVo {
     String idcard;
     Integer telephone;
     String profession;
-    char sex;
-    char type;
+    String sex;
+    String type;
     String remark;
     Timestamp createTime;
     Timestamp updateTime;

@@ -49,7 +49,7 @@ public class ActivityService implements BaseService<Activity>{
                 criteria.andLessThanOrEqualTo("createTime", searchMap.get("endTime"));
             }
             //名称模糊搜索
-            if (StringUtil.isNotEmpty((String) searchMap.get("name"))) {
+            if (StringUtil.isNotEmpty((String) searchMap.get("title"))) {
                 criteria.andLike("title", "%" + (String) searchMap.get("name") + "%");
             }
             if ((Integer) searchMap.get("pageNum") != null) {

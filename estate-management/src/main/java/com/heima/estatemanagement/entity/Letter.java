@@ -22,7 +22,7 @@ public class Letter {
     String communityName;
     Integer ownerId;
     String ownerName;
-    char origin;
+    String origin;
     String title;
     String content;
     Timestamp createTime;

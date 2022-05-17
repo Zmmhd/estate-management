@@ -28,5 +28,5 @@ public class Device {
     Integer expectedUsefulLife;
     Timestamp createTime;
     Timestamp updateTime;
-    Timestamp purchaseTime;
+    Timestamp purchaseDate;
 }

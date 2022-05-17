@@ -103,18 +103,18 @@
             <td>{{parkingusage.id}}</td>
             <td>{{parkingusage.communityName}}</td>
             <td>{{parkingusage.code}}</td>
-            <td>{{parkingusage.car_number}}</td>
+            <td>{{parkingusage.carNumber}}</td>
             <td>
                 <img :src="urlImg(parkingusage.thumbnail)" width="50" height="30" alt="">
             </td>
-            <td>{{parkingusage.owner_name}}</td>
-            <td>{{parkingusage.phone}}</td>
+            <td>{{parkingusage.ownerName}}</td>
+            <td>{{parkingusage.telephone}}</td>
             <td class="td-status">
                 <span :class="parkingusage.status == 0?'layui-btn layui-btn-normal':'layui-btn layui-btn-disabled'">
                     {{parkingusage.status == 0?'租用':'售出'}}
                 </span>
             </td>
-            <td>{{parkingusage.total_fee}}</td>
+            <td>{{parkingusage.totalFee}}</td>
             <td>{{dateFormat(parkingusage.startTime)}}</td>
             <td>{{dateFormat(parkingusage.endTime)}}</td>
             <td>{{dateFormat(parkingusage.createTime)}}</td>
