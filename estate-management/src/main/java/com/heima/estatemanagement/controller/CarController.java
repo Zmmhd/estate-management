@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +42,9 @@ public class CarController {
 
     @RequestMapping("/add")
     public Result add(@RequestBody Car car){
+        Date date = new Date();
+        car.setCreateTime(new Timestamp(date.getTime()));
+        car.setUpdateTime(new Timestamp(date.getTime()));
         Boolean add = carService.add(car);
         return new Result(true,StatusCode.OK,MessageConstant.COMMUNITY_ADD_SUCCESS);
     }

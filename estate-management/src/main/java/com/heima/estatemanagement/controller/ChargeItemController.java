@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,9 @@ public class ChargeItemController {
 
     @RequestMapping("/add")
     public Result add(@RequestBody ChargeItem chargeItem){
+        Date date = new Date();
+        chargeItem.setCreateTime(new Timestamp(date.getTime()));
+        chargeItem.setUpdateTime(new Timestamp(date.getTime()));
         Boolean add = chargeItemService.add(chargeItem);
         return new Result(true,StatusCode.OK,MessageConstant.COMMUNITY_ADD_SUCCESS);
     }

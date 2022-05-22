@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,9 @@ public class LetterController {
 
     @RequestMapping("/add")
     public Result add(@RequestBody Letter letter){
+        Date date = new Date();
+        letter.setCreateTime(new Timestamp(date.getTime()));
+        letter.setUpdateTime(new Timestamp(date.getTime()));
         Boolean add = letterService.add(letter);
         return new Result(true,StatusCode.OK,MessageConstant.COMMUNITY_ADD_SUCCESS);
     }
