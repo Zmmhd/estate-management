@@ -31,6 +31,9 @@
         <el-form-item label="所属小区" prop="communityName">
             <el-input v-model="building.communityName"></el-input>
         </el-form-item>
+        <el-form-item label="所属小区ID" prop="communityId">
+            <el-input v-model="building.communityId"></el-input>
+        </el-form-item>
         <el-form-item label="栋数名称" prop="name">
             <el-input v-model="building.name"></el-input>
         </el-form-item>
@@ -65,6 +68,9 @@
             rules: {
                 communityName: [
                     { required: true, message: '请输入所属小区名称', trigger: 'blur' }
+                ],
+                communityId: [
+                    { required: true, message: '请输入所属小区ID', trigger: 'blur' }
                 ],
                 name: [
                     { required: true, message: '请输入栋数名称', trigger: 'blur' }

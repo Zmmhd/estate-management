@@ -63,7 +63,6 @@
             <th>
                 所属成员
             </th>
-
             <th>
                 车辆颜色
             </th>
@@ -245,7 +244,7 @@
                 } else {
                     this.checkedIDs = [];
                     // 全选
-                    this.petList.forEach( (item) =>{
+                    this.vehicleList.forEach( (item) =>{
                         this.checkedIDs.push(item.id); // 与checkbox的value统一
                     })
                 }
@@ -270,7 +269,6 @@
                     //当时间区间不为空，往searchMap中添加条件
                     if(this.selectDate[0] != null && this.selectDate[0] != ''){
                         this.searchMap.startTime = this.dateFormat(this.selectDate[0]);
-
                     }
                     if(this.selectDate[1] != null && this.selectDate[1] != ''){
                         this.searchMap.endTime = this.dateFormat(this.selectDate[1]);
@@ -293,7 +291,7 @@
             },
 
             //编辑
-            pet_edit (title,url,id,w,h) {
+            vehicle_edit (title,url,id,w,h) {
                 url = url+"?id="+id;
                 this.x_admin_show(title,url,w,h);
             },

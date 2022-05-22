@@ -40,8 +40,8 @@
             <el-form-item label="车牌号" prop="carNumber">
                 <el-input v-model="parkingusage.carNumber"></el-input>
             </el-form-item>
-            <el-form-item label="联系方式" prop="phone">
-                <el-input v-model="parkingusage.phone"></el-input>
+            <el-form-item label="联系方式" prop="telephone">
+                <el-input v-model="parkingusage.telephone"></el-input>
             </el-form-item>
             <el-form-item label="总费用" prop="totalFee">
                 <el-input v-model="parkingusage.totalFee"></el-input>
@@ -115,7 +115,7 @@
                 carNumber: [
                     { required: true, message: '请输入车牌号', trigger: 'blur' }
                 ],
-                phone: [
+                telephone: [
                     { required: true, message: '请输入联系方式', trigger: 'blur' }
                 ],
                 totalFee: [

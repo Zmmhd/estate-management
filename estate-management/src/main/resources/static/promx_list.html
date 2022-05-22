@@ -99,9 +99,9 @@
             <td>{{promx.actualMoney}}</td>
             <td>{{promx.telephone}}</td>
             <td>{{dateFormat(promx.payTime)}}</td>
-            <td>{{dateFormat(device.createTime)}}</td>
+            <td>{{dateFormat(promx.createTime)}}</td>
             <td class="td-manage">
-                <a title="编辑" href="javascript:;" @click="promx_edit('编辑','promx_add.html',device.id,'1000','600')"
+                <a title="编辑" href="javascript:;" @click="promx_edit('编辑','promx_add.html',promx.id,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>

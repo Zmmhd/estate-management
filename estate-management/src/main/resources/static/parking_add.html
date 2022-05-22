@@ -31,6 +31,9 @@
             <el-form-item label="所属小区" prop="communityName">
                 <el-input v-model="parking.communityName"></el-input>
             </el-form-item>
+            <el-form-item label="车位编号" prop="code">
+                <el-input v-model="parking.code"></el-input>
+            </el-form-item>
             <el-form-item label="车位名称" prop="name">
                 <el-input v-model="parking.name"></el-input>
             </el-form-item>
@@ -69,7 +72,9 @@
                 ],
                 name: [
                     { required: true, message: '请输入车位名称', trigger: 'blur' },
-                    { min: 11,max: 20, message: '长度必须大于11、小于20个字符', trigger: 'blur' }
+                ],
+                code: [
+                    { required: true, message: '请输入车位编号', trigger: 'blur' },
                 ],
                 status:[
                     { required: true, message: '请选择小区状态', trigger: 'change' }

@@ -28,9 +28,6 @@
     </div>
     <div class="x-body">
         <el-form :model="vehicle" :rules="rules" ref="vehicleFormRef" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="所属小区" prop="communityName">
-                <el-input v-model="vehicle.communityName"></el-input>
-            </el-form-item>
             <el-form-item label="所属成员" prop="ownerName">
                 <el-input v-model="vehicle.ownerName"></el-input>
             </el-form-item>
@@ -79,10 +76,6 @@
             vehicle:{picture:"",id:""},
             fileList:[],
             rules: {
-                communityName: [
-                    { required: true, message: '请输入所属小区', trigger: 'blur' },
-                    { max: 50, message: '长度小于50个字符', trigger: 'blur' }
-                ],
                 ownerName: [
                     { required: true, message: '请输入所属成员', trigger: 'blur' },
                 ],
