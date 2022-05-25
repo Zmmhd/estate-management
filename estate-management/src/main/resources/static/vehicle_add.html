@@ -31,6 +31,9 @@
             <el-form-item label="所属成员" prop="ownerName">
                 <el-input v-model="vehicle.ownerName"></el-input>
             </el-form-item>
+            <el-form-item label="所属成员ID" prop="ownerId">
+                <el-input v-model="vehicle.ownerId"></el-input>
+            </el-form-item>
             <el-form-item label="车辆颜色" prop="color">
                 <el-input v-model="vehicle.color"></el-input>
             </el-form-item>
@@ -78,6 +81,9 @@
             rules: {
                 ownerName: [
                     { required: true, message: '请输入所属成员', trigger: 'blur' },
+                ],
+                ownerId: [
+                    { required: true, message: '请输入所属成员ID', trigger: 'blur' },
                 ],
                 color: [
                     { required: true, message: '请输入车辆颜色', trigger: 'blur' }
