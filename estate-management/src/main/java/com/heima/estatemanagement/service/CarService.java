@@ -33,7 +33,7 @@ public class CarService {
     OwnerMapper ownerMapper;
 
 
-    public PageInfo<CarVo> search(Map searchMap) {
+    public Page<CarVo> search(Map searchMap) {
         //通用Mapper多条件搜索，标准写法
         Example example = new Example(Car.class);
         //1.初始化分页条件
@@ -66,18 +66,9 @@ public class CarService {
         }
         PageHelper.startPage(pageNum, pageSize);
         //使用PageHelper插件完成分页
-        Page<Car> carPage = (Page<Car>) carMapper.selectByExample(example);
-        List<Car> cars = carPage.getResult();
+        Page<CarVo> carPage = (Page<CarVo>) carMapper.find();
 
-        List<CarVo> carVos = new ArrayList<>();
-        for (int i = 0; i < cars.size(); i++) {
-            CarVo carVo = new CarVo();
-            BeanUtils.copyProperties(cars.get(i),carVo);
-            carVo.setOwnerName(ownerMapper.selectByPrimaryKey(cars.get(i).getOwnerId()).getName());
-            carVos.add(carVo);
-        }
-        PageInfo<CarVo> carVoPageInfo = new PageInfo<>(carVos);
-        return carVoPageInfo;
+        return carPage;
     }
 
 

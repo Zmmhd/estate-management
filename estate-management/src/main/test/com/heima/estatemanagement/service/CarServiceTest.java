@@ -21,8 +21,5 @@ public class CarServiceTest extends TestCase {
 
     @Test
     public void testSearch() {
-        PageInfo<CarVo> search = carService.search(null);
-        List<CarVo> list = search.getList();
-        list.forEach(System.out::println);
     }
 }
