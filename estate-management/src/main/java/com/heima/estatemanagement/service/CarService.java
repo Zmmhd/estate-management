@@ -40,23 +40,7 @@ public class CarService {
         int pageNum = 1;
         int pageSize = 2;
         if (searchMap != null) {
-            Example.Criteria criteria = example.createCriteria();//创建查询条件
-            //时间区间
-            if (StringUtil.isNotEmpty((String) searchMap.get("startTime"))) {
-                criteria.andGreaterThanOrEqualTo("createTime", searchMap.get("startTime"));
-            }
-            if (StringUtil.isNotEmpty((String) searchMap.get("endTime"))) {
-                criteria.andLessThanOrEqualTo("createTime", searchMap.get("endTime"));
-                criteria.andLessThanOrEqualTo("createTime", searchMap.get("endTime"));
-            }
-            //名称模糊搜索
-            if (StringUtil.isNotEmpty((String) searchMap.get("name"))) {
 
-                System.out.println("----------------");
-                System.out.println(searchMap.get("carNumber"));
-
-                criteria.andLike("carNumber", "%" + (String) searchMap.get("name") + "%");
-            }
             if ((Integer) searchMap.get("pageNum") != null) {
                 pageNum = (Integer) searchMap.get("pageNum");
             }
@@ -66,7 +50,7 @@ public class CarService {
         }
         PageHelper.startPage(pageNum, pageSize);
         //使用PageHelper插件完成分页
-        Page<CarVo> carPage = (Page<CarVo>) carMapper.find();
+        Page<CarVo> carPage = (Page<CarVo>) carMapper.find((String) searchMap.get("carNumber"));
 
         return carPage;
     }
