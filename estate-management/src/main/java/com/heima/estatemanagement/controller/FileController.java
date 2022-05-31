@@ -41,14 +41,20 @@ public class FileController {
 	 */
 	@RequestMapping(value="/fileupload")
 	public Result uploads(@RequestParam("file")MultipartFile file, HttpServletRequest request,HttpServletResponse response) throws IOException {
+
+		String savepath = request.getSession().getServletContext().getRealPath("/");
+		System.out.println("--------------------------------");
+		System.out.println(savepath);
+		System.out.println("-----------------------------");
+
 		//获取当前项目所在绝对路径
 		String absolutePath = System.getProperty("user.dir");
 		//当前项目名称，可以自定义
 		String projectName = "/estate-management";
 		//文件上传后所在绝对路径
-		String savePath = absolutePath+projectName+"/src/main/resources/static/fileupload/";
+		String savePath = absolutePath+projectName+"/src/main/resources/static/images/";
 		//保存在数据库的文件地址
-		String saveUrl = "/fileupload/";
+		String saveUrl = "/images/";
 		// 定义允许上传的文件扩展名
 		HashMap<String, String> extMap = new HashMap<String, String>();
 		extMap.put("image", "gif,jpg,jpeg,png,bmp");
@@ -120,13 +126,13 @@ public class FileController {
 	 */
 	@RequestMapping(value="/delfile")
 	public Result fileDel(@RequestParam String fileName){
-		String name = fileName.replace("/fileupload/","");
+		String name = fileName.replace("/images/","");
 		//获取当前项目所在绝对路径
 		String absolutePath = System.getProperty("user.dir");
 		//当前项目名称，可以自定义
 		String projectName = "/estate-management";
 		//文件上传后所在绝对路径
-		String savePath = absolutePath+projectName+"/src/main/resources/static/fileupload/";
+		String savePath = absolutePath+projectName+"/src/main/resources/static/images/";
 		File file = new File(savePath+name);
 		if (file.exists()){//文件是否存在
 			file.delete();//删除文件
