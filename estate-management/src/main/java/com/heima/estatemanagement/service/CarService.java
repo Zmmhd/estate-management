@@ -33,30 +33,14 @@ public class CarService {
     OwnerMapper ownerMapper;
 
 
-    public PageInfo<CarVo> search(Map searchMap) {
+    public Page<CarVo> search(Map searchMap) {
         //通用Mapper多条件搜索，标准写法
         Example example = new Example(Car.class);
         //1.初始化分页条件
         int pageNum = 1;
         int pageSize = 2;
         if (searchMap != null) {
-            Example.Criteria criteria = example.createCriteria();//创建查询条件
-            //时间区间
-            if (StringUtil.isNotEmpty((String) searchMap.get("startTime"))) {
-                criteria.andGreaterThanOrEqualTo("createTime", searchMap.get("startTime"));
-            }
-            if (StringUtil.isNotEmpty((String) searchMap.get("endTime"))) {
-                criteria.andLessThanOrEqualTo("createTime", searchMap.get("endTime"));
-                criteria.andLessThanOrEqualTo("createTime", searchMap.get("endTime"));
-            }
-            //名称模糊搜索
-            if (StringUtil.isNotEmpty((String) searchMap.get("name"))) {
 
-                System.out.println("----------------");
-                System.out.println(searchMap.get("carNumber"));
-
-                criteria.andLike("carNumber", "%" + (String) searchMap.get("name") + "%");
-            }
             if ((Integer) searchMap.get("pageNum") != null) {
                 pageNum = (Integer) searchMap.get("pageNum");
             }
@@ -66,18 +50,9 @@ public class CarService {
         }
         PageHelper.startPage(pageNum, pageSize);
         //使用PageHelper插件完成分页
-        Page<Car> carPage = (Page<Car>) carMapper.selectByExample(example);
-        List<Car> cars = carPage.getResult();
+        Page<CarVo> carPage = (Page<CarVo>) carMapper.find((String) searchMap.get("carNumber"));
 
-        List<CarVo> carVos = new ArrayList<>();
-        for (int i = 0; i < cars.size(); i++) {
-            CarVo carVo = new CarVo();
-            BeanUtils.copyProperties(cars.get(i),carVo);
-            carVo.setOwnerName(ownerMapper.selectByPrimaryKey(cars.get(i).getOwnerId()).getName());
-            carVos.add(carVo);
-        }
-        PageInfo<CarVo> carVoPageInfo = new PageInfo<>(carVos);
-        return carVoPageInfo;
+        return carPage;
     }
 
 

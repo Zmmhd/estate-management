@@ -36,8 +36,8 @@ public class CarController {
 
     @RequestMapping("/search")
     public PageResult search(@RequestBody Map searchMap){
-        PageInfo<CarVo> page = carService.search(searchMap);
-        return new PageResult(true, StatusCode.OK, MessageConstant.COMMUNITY_SEARCH_SUCCESS,page.getList(),page.getTotal());
+        Page<CarVo> page = carService.search(searchMap);
+        return new PageResult(true, StatusCode.OK, MessageConstant.COMMUNITY_SEARCH_SUCCESS,page.getResult(),page.getTotal());
     }
 
     @RequestMapping("/add")
