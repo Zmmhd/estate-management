@@ -89,13 +89,14 @@
             <td>{{letter.communityName}}</td>
             <td>{{letter.origin}}</td>
             <td>{{letter.title}}</td>
+            <td>{{letter.content}}</td>
             <td>{{dateFormat(letter.createTime)}}</td>
             <td class="td-status">
                 <span :class="letter.status == 0?'layui-btn layui-btn-normal':'layui-btn layui-btn-disabled'">
                     {{letter.status == 0?'未读':'已读'}}
                 </span>
             </td>
-            <td>{{letter.content}}</td>
+
             <td class="td-manage">
                 <a style="text-decoration:none" @click="letter.status == 0?admin_stop(letter.id):admin_start(letter.id)" href="javascript:;" :title="letter.status == 0?'未读':'已读'">
                     <i class="layui-icon" v-if="letter.status == 0">&#xe601;</i>
