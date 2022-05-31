@@ -10,6 +10,8 @@ import com.heima.estatemanagement.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,9 @@ public class CommunityController {
 
     @RequestMapping("/add")
     public Result add(@RequestBody Community community){
+        Date date = new Date();
+        community.setCreateTime(new Timestamp(date.getTime()));
+        community.setUpdateTime(new Timestamp(date.getTime()));
         Boolean add = communityService.add(community);
         return new Result(true,StatusCode.OK,MessageConstant.COMMUNITY_ADD_SUCCESS);
     }

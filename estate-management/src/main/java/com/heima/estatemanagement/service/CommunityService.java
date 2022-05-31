@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +67,9 @@ public class CommunityService implements BaseService<Community> {
 
     @Override
     public Boolean add(Community community) {
+        Date date = new Date();
+        community.setCreateTime(new Timestamp(date.getTime()));
+        community.setUpdateTime(new Timestamp(date.getTime()));
         int row = communityMapper.insert(community);
         if (row > 0) {
             return true;
